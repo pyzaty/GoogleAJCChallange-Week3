@@ -103,7 +103,7 @@ private fun HomeGardenSection() {
             .padding(horizontal = 8.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        defaultGardenThemes.forEach(){it->
+        homeGardenItems.forEach(){ it->
             HomeGardeListItem(plantTheme =it )
         }
 
