@@ -3,23 +3,35 @@ package com.pyza.bloomapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pyza.bloomapp.ui.theme.BloomAppTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val homeViewModel:HomeViewModel by viewModels {
+        object : ViewModelProvider.Factory{
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                val repository= InMemoryPlantService()
+
+                @Suppress("UNCHECKED_CAST")
+                return HomeViewModel(
+                    plantRepository = repository
+                ) as T
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BloomAppTheme {
                val navController= rememberNavController()
-                NavHost(navController = navController, startDestination = "welcome" ){
+                NavHost(navController = navController, startDestination = "home" ){
                     composable("welcome"){
                         WelcomeScreen(navController)
                     }
@@ -27,7 +39,7 @@ class MainActivity : ComponentActivity() {
                         LoginScreen(navController)
                     }
                     composable("home"){
-                        HomeScreen()
+                        HomeScreen(homeViewModel = homeViewModel)
                     }
                 }
             }

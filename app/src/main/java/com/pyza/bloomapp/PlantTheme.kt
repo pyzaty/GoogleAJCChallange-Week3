@@ -16,7 +16,7 @@ val defaultPlantTheme= listOf(
 
 )
 
-val defaultGardenThemes = listOf(
+val homeGardenItems = listOf(
     PlantTheme(R.drawable.katarzyna_modrzejewska,"Monstera"),
     PlantTheme(R.drawable.plant6208087,"Anlgomea"),
     PlantTheme(R.drawable.karolina_grabowska,"Peace Lily"),
