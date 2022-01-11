@@ -7,6 +7,10 @@ package com.pyza.bloomapp
  *  take the information and display it.
  */
 data class HomeViewState(
+
     val plantThemes:List<PlantTheme> = emptyList(),
     val homeGardenItems:List<PlantTheme> = emptyList()
-){}
+){
+    val showLoading:Boolean
+        get() = plantThemes.isEmpty() || homeGardenItems.isEmpty()
+}

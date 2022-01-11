@@ -32,7 +32,26 @@ fun HomeScreenScaffold(
             BloomBottomBar()
         }
     ) { paddingValues ->
-        HomeScreenContent(state,paddingValues)
+        if (state.showLoading) {
+            HomeScreenLoader(paddingValues)
+        } else {
+            HomeScreenContent(state, paddingValues)
+        }
+    }
+}
+
+@Composable
+fun HomeScreenLoader(paddingValues: PaddingValues){
+    Box(
+    modifier = Modifier
+        .fillMaxSize()
+        .padding(paddingValues)
+    ){
+        CircularProgressIndicator(
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.Center)
+        )
     }
 }
 
