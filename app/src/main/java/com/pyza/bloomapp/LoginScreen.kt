@@ -23,30 +23,32 @@ import com.pyza.bloomapp.ui.theme.BloomAppTheme
 
 
 @Composable
-fun LoginScreen(navController: NavController){
+fun LoginScreen(navController: NavController) {
     Surface(
-        color=MaterialTheme.colors.background,
-        modifier=Modifier
+        color = MaterialTheme.colors.background,
+        modifier = Modifier
             .fillMaxSize()
-    ){
+    ) {
         Column(
-            modifier= Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             LogInHeader()
 
             EmailInput()
 
-            Spacer(modifier = Modifier
-                .height(8.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(8.dp)
+            )
 
             PasswordInput()
 
             TermsOfServiceLabel()
 
-            Spacer(modifier=Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             LoginButton(navController)
         }
@@ -57,7 +59,7 @@ fun LoginScreen(navController: NavController){
 private fun LoginButton(navController: NavController) {
     BloomSecondaryButton(
         buttonText = "Log in",
-        onClick={
+        onClick = {
             navController.navigate("home")
         }
     )
@@ -76,11 +78,11 @@ private fun TermsOfServiceLabel() {
 
 @Composable
 private fun PasswordInput() {
-    val text=remember{mutableStateOf("")}
+    val text = remember { mutableStateOf("") }
     OutlinedTextField(
         value = text.value,
-        onValueChange = {newText->
-            text.value=newText
+        onValueChange = { newText ->
+            text.value = newText
         },
         label = {
             Text(text = "Password (8+ characters)")
@@ -95,18 +97,18 @@ private fun PasswordInput() {
 
 @Composable
 private fun EmailInput() {
-    val text= remember {
+    val text = remember {
         mutableStateOf("")
     }
     OutlinedTextField(
         value = text.value,
-        onValueChange = { newText->
-            text.value=newText
+        onValueChange = { newText ->
+            text.value = newText
         },
         label = {
             Text(text = "Email address")
         },
-        keyboardOptions=KeyboardOptions.Default.copy(
+        keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Email
         ),
         modifier = Modifier.fillMaxWidth()
@@ -127,15 +129,15 @@ private fun LogInHeader() {
 
 @Preview
 @Composable
-private fun previewDarkLoginScreen(){
-    BloomAppTheme(darkTheme=true) {
+private fun previewDarkLoginScreen() {
+    BloomAppTheme(darkTheme = true) {
         LoginScreen(rememberNavController())
     }
 }
 
 @Preview
 @Composable
-private fun previewLightLoginScreen(){
+private fun previewLightLoginScreen() {
     BloomAppTheme(darkTheme = false) {
         LoginScreen(rememberNavController())
     }

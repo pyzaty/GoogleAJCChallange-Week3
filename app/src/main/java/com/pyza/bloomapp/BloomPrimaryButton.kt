@@ -13,19 +13,19 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BloomSecondaryButton(
-    buttonText:String,
-    onClick:()->Unit ={}
-){
+    buttonText: String,
+    onClick: () -> Unit = {}
+) {
     Button(
-        colors= ButtonDefaults.buttonColors(
+        colors = ButtonDefaults.buttonColors(
             backgroundColor = MaterialTheme.colors.secondary
         ),
-        shape= MaterialTheme.shapes.medium,
+        shape = MaterialTheme.shapes.medium,
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
-            .padding(horizontal= 16.dp)
+            .padding(horizontal = 16.dp)
     ) {
         Text(text = buttonText)
     }

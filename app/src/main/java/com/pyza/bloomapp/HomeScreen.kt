@@ -20,11 +20,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pyza.bloomapp.ui.theme.BloomAppTheme
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen() {
 
-    val factory= object: ViewModelProvider.Factory{
+    val factory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            val repository=InMemoryPlantService()
+            val repository = InMemoryPlantService()
 
             @Suppress("UNCHECKED_CAST")
             return HomeViewModel(
@@ -33,15 +33,15 @@ fun HomeScreen(){
         }
     }
 
-    val homeViewModel : HomeViewModel = viewModel(key = null, factory = factory)
-    val currentState:MutableState<HomeViewState> =  homeViewModel.viewState
+    val homeViewModel: HomeViewModel = viewModel(key = null, factory = factory)
+    val currentState: MutableState<HomeViewState> = homeViewModel.viewState
     HomeScreenScaffold(state = currentState.value)
 }
 
 @Composable
 fun HomeScreenScaffold(
     state: HomeViewState
-){
+) {
     Scaffold(
         bottomBar = {
             BloomBottomBar()
@@ -56,12 +56,12 @@ fun HomeScreenScaffold(
 }
 
 @Composable
-fun HomeScreenLoader(paddingValues: PaddingValues){
+fun HomeScreenLoader(paddingValues: PaddingValues) {
     Box(
-    modifier = Modifier
-        .fillMaxSize()
-        .padding(paddingValues)
-    ){
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+    ) {
         CircularProgressIndicator(
             modifier = Modifier
                 .wrapContentSize()
@@ -73,17 +73,33 @@ fun HomeScreenLoader(paddingValues: PaddingValues){
 @Composable
 private fun BloomBottomBar() {
     BottomAppBar(
-        backgroundColor=MaterialTheme.colors.primary
-    ){
-        BloomBottomNavigationItem(true,Icons.Default.Home,"Home")
-        BloomBottomNavigationItem(selected = false, icon =Icons.Default.FavoriteBorder , labelText = "Favourites")
-        BloomBottomNavigationItem(selected = false, icon = Icons.Default.AccountCircle , labelText ="Profile" )
-        BloomBottomNavigationItem(selected = false, icon =Icons.Default.ShoppingCart , labelText ="Cart" )
+        backgroundColor = MaterialTheme.colors.primary
+    ) {
+        BloomBottomNavigationItem(true, Icons.Default.Home, "Home")
+        BloomBottomNavigationItem(
+            selected = false,
+            icon = Icons.Default.FavoriteBorder,
+            labelText = "Favourites"
+        )
+        BloomBottomNavigationItem(
+            selected = false,
+            icon = Icons.Default.AccountCircle,
+            labelText = "Profile"
+        )
+        BloomBottomNavigationItem(
+            selected = false,
+            icon = Icons.Default.ShoppingCart,
+            labelText = "Cart"
+        )
     }
 }
 
 @Composable
-private fun RowScope.BloomBottomNavigationItem(selected:Boolean, icon:ImageVector, labelText:String) {
+private fun RowScope.BloomBottomNavigationItem(
+    selected: Boolean,
+    icon: ImageVector,
+    labelText: String
+) {
     BottomNavigationItem(selected = selected, onClick = { /*TODO*/ },
         icon = {
             Icon(
@@ -98,8 +114,9 @@ private fun RowScope.BloomBottomNavigationItem(selected:Boolean, icon:ImageVecto
 
 @Composable
 private fun HomeScreenContent(
-    state:HomeViewState,
-    paddingValues: PaddingValues) {
+    state: HomeViewState,
+    paddingValues: PaddingValues
+) {
     Surface(
         color = MaterialTheme.colors.background,
         modifier = Modifier
@@ -121,13 +138,13 @@ private fun HomeScreenContent(
 
 @Composable
 private fun HomeGardenSection(
-    homeGardenItems:List<PlantTheme>
+    homeGardenItems: List<PlantTheme>
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(horizontal = 16.dp)
-    ){
+    ) {
         Text(
             text = "Design your home garden",
             modifier = Modifier
@@ -140,19 +157,19 @@ private fun HomeGardenSection(
         Icon(
             Icons.Default.FilterList,
             contentDescription = "Filter",
-            modifier=Modifier
+            modifier = Modifier
                 .size(24.dp)
         )
     }
-    
+
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier
             .padding(horizontal = 8.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        homeGardenItems.forEach{
-            HomeGardeListItem(plantTheme =it )
+        homeGardenItems.forEach {
+            HomeGardeListItem(plantTheme = it)
         }
 
     }
@@ -160,7 +177,7 @@ private fun HomeGardenSection(
 }
 
 @Composable
-private fun BrowseThemesSection(themes:List<PlantTheme>) {
+private fun BrowseThemesSection(themes: List<PlantTheme>) {
     Text(
         text = "Browse themes",
         modifier = Modifier
@@ -174,8 +191,8 @@ private fun BrowseThemesSection(themes:List<PlantTheme>) {
         modifier = Modifier
             .horizontalScroll(rememberScrollState())
             .padding(16.dp)
-    ){
-        themes.forEach{ theme ->
+    ) {
+        themes.forEach { theme ->
             PlantThemeCard(theme)
 
         }
@@ -206,8 +223,8 @@ private fun SearchInput() {
 
 @Preview
 @Composable
-private fun PreviewDarkMode(){
-    val previewState=HomeViewState(
+private fun PreviewDarkMode() {
+    val previewState = HomeViewState(
         plantThemes = defaultPlantTheme,
         homeGardenItems = homeGardenItems
     )
@@ -218,12 +235,12 @@ private fun PreviewDarkMode(){
 
 @Preview
 @Composable
-private fun PreviewLightMode(){
-    val previewState=HomeViewState(
+private fun PreviewLightMode() {
+    val previewState = HomeViewState(
         plantThemes = defaultPlantTheme,
         homeGardenItems = homeGardenItems
     )
-        BloomAppTheme(darkTheme = false) {
-            HomeScreenScaffold(previewState)
-        }
+    BloomAppTheme(darkTheme = false) {
+        HomeScreenScaffold(previewState)
+    }
 }

@@ -7,6 +7,6 @@ package com.pyza.bloomapp
  * We use an interface so we could create a multiple implementations and swap tem out.
  */
 interface PlantRepository {
-    suspend fun fetchThemes():List<PlantTheme>
-    suspend fun fetchHomeGardenItems():List<PlantTheme>
+    suspend fun fetchThemes(): List<PlantTheme>
+    suspend fun fetchHomeGardenItems(): List<PlantTheme>
 }

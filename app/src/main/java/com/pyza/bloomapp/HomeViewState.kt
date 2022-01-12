@@ -8,9 +8,9 @@ package com.pyza.bloomapp
  */
 data class HomeViewState(
 
-    val plantThemes:List<PlantTheme> = emptyList(),
-    val homeGardenItems:List<PlantTheme> = emptyList()
-){
-    val showLoading:Boolean
+    val plantThemes: List<PlantTheme> = emptyList(),
+    val homeGardenItems: List<PlantTheme> = emptyList()
+) {
+    val showLoading: Boolean
         get() = plantThemes.isEmpty() || homeGardenItems.isEmpty()
 }

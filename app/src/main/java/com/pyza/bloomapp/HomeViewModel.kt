@@ -12,33 +12,32 @@ import kotlinx.coroutines.launch
  * information
  */
 class HomeViewModel(
-    private val plantRepository: PlantRepository):ViewModel()
-{
+    private val plantRepository: PlantRepository
+) : ViewModel() {
 
-    private val _viewState= mutableStateOf(HomeViewState())
+    private val _viewState = mutableStateOf(HomeViewState())
     val viewState: MutableState<HomeViewState> = _viewState
 
-    init{
+    init {
         fetchPlantThemes()
         fetchHomeGardenItems()
     }
 
-    private fun fetchPlantThemes(){
+    private fun fetchPlantThemes() {
         viewModelScope.launch {
             val plantThems = plantRepository.fetchThemes()
-            _viewState.value=_viewState.value.copy(
+            _viewState.value = _viewState.value.copy(
                 plantThemes = plantThems
             )
         }
     }
 
-    private fun fetchHomeGardenItems(){
+    private fun fetchHomeGardenItems() {
         viewModelScope.launch {
-            val gardenItems=plantRepository.fetchHomeGardenItems()
-            _viewState.value=_viewState.value.copy(
+            val gardenItems = plantRepository.fetchHomeGardenItems()
+            _viewState.value = _viewState.value.copy(
                 homeGardenItems = gardenItems
             )
         }
     }
-
 }

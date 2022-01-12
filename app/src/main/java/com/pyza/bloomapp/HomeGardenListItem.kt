@@ -17,7 +17,7 @@ import com.pyza.bloomapp.ui.theme.BloomAppTheme
 
 
 @Composable
-fun HomeGardeListItem(plantTheme: PlantTheme){
+fun HomeGardeListItem(plantTheme: PlantTheme) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
@@ -36,7 +36,7 @@ fun HomeGardeListItem(plantTheme: PlantTheme){
 private fun TitleDescriptionCheckboxRow(plantTheme: PlantTheme) {
     Row(
         verticalAlignment = Alignment.CenterVertically
-    ){
+    ) {
         TitleAndDescription(plantTheme)
         PlantCheckBox()
     }
@@ -44,17 +44,17 @@ private fun TitleDescriptionCheckboxRow(plantTheme: PlantTheme) {
 
 @Composable
 private fun PlantCheckBox() {
-    val checkedState=remember {
+    val checkedState = remember {
         mutableStateOf(false)
     }
     Checkbox(
         checked = checkedState.value,
-        onCheckedChange = {isChecked->
-            checkedState.value=isChecked
+        onCheckedChange = { isChecked ->
+            checkedState.value = isChecked
         },
         modifier = Modifier
             .size(24.dp),
-        colors=CheckboxDefaults.colors(
+        colors = CheckboxDefaults.colors(
             checkmarkColor = MaterialTheme.colors.background
         )
     )
@@ -63,19 +63,19 @@ private fun PlantCheckBox() {
 @Composable
 private fun RowScope.TitleAndDescription(plantTheme: PlantTheme) {
     Column(
-        modifier=Modifier
+        modifier = Modifier
             .weight(1F)
     ) {
         Text(
             text = plantTheme.title,
             modifier = Modifier
-                .paddingFromBaseline(top=24.dp)
+                .paddingFromBaseline(top = 24.dp)
         )
         Text(
             text = "This is a description",
             style = MaterialTheme.typography.body1,
             modifier = Modifier
-                .paddingFromBaseline(bottom=24.dp)
+                .paddingFromBaseline(bottom = 24.dp)
         )
     }
 }
@@ -94,26 +94,26 @@ private fun PlantImage(plantTheme: PlantTheme) {
 
 @Preview
 @Composable
-private fun PreviewDarkItem(){
-        BloomAppTheme(darkTheme = true) {
-            Surface(
-                color = MaterialTheme.colors.background
-            ) {
+private fun PreviewDarkItem() {
+    BloomAppTheme(darkTheme = true) {
+        Surface(
+            color = MaterialTheme.colors.background
+        ) {
             HomeGardeListItem(plantTheme = homeGardenItems.first())
-            }
         }
+    }
 }
 
 
 @Preview
 @Composable
-private fun PreviewLightItem(){
-        BloomAppTheme(darkTheme = false) {
-            Surface(
-                color=MaterialTheme.colors.background
-            ) {
+private fun PreviewLightItem() {
+    BloomAppTheme(darkTheme = false) {
+        Surface(
+            color = MaterialTheme.colors.background
+        ) {
 
-        HomeGardeListItem(plantTheme = homeGardenItems.first())
-            }
+            HomeGardeListItem(plantTheme = homeGardenItems.first())
         }
+    }
 }

@@ -14,28 +14,29 @@ import androidx.compose.ui.unit.dp
 import com.pyza.bloomapp.ui.theme.BloomAppTheme
 
 @Composable
-fun PlantThemeCard(plantTheme:PlantTheme){
+fun PlantThemeCard(plantTheme: PlantTheme) {
     Card(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .size(136.dp),
 
-    ) {
+        ) {
         Column {
             Image(
                 painter = painterResource(
-                    id = plantTheme.imageRes),
-                    contentDescription ="${plantTheme.title} Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .width(136.dp)
-                        .height(96.dp)
-                )
+                    id = plantTheme.imageRes
+                ),
+                contentDescription = "${plantTheme.title} Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .width(136.dp)
+                    .height(96.dp)
+            )
             Text(
                 text = plantTheme.title,
-                modifier=Modifier
+                modifier = Modifier
                     .padding(horizontal = 16.dp)
-                    .paddingFromBaseline(top=24.dp)
+                    .paddingFromBaseline(top = 24.dp)
             )
         }
     }
@@ -43,7 +44,7 @@ fun PlantThemeCard(plantTheme:PlantTheme){
 
 @Preview
 @Composable
-private fun PreviewLightPlantThemeCard(){
+private fun PreviewLightPlantThemeCard() {
     BloomAppTheme(darkTheme = false) {
         PlantThemeCard(
             plantTheme = defaultPlantTheme.first()
@@ -53,7 +54,7 @@ private fun PreviewLightPlantThemeCard(){
 
 @Preview
 @Composable
-private fun PreviewDarkPlantThemeCard(){
+private fun PreviewDarkPlantThemeCard() {
     BloomAppTheme(darkTheme = true) {
         PlantThemeCard(
             plantTheme = defaultPlantTheme.first()

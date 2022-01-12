@@ -18,11 +18,12 @@ import com.pyza.bloomapp.ui.theme.Pink900
 import com.pyza.bloomapp.ui.theme.White
 
 @Composable
-fun WelcomeScreen(navController:NavController){
+fun WelcomeScreen(navController: NavController) {
     Surface(
-        color=MaterialTheme.colors.primary,
+        color = MaterialTheme.colors.primary,
         modifier = Modifier
-            .fillMaxSize())
+            .fillMaxSize()
+    )
     {
         WelcomeBackground()
 
@@ -38,11 +39,11 @@ private fun WelcomeScreenContent(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(
-            modifier =Modifier.height(72.dp)
+            modifier = Modifier.height(72.dp)
         )
         LeafImage()
         Spacer(
-            modifier=Modifier.height(48.dp)
+            modifier = Modifier.height(48.dp)
         )
 
         LogoImage()
@@ -64,10 +65,10 @@ private fun WelcomeScreenContent(navController: NavController) {
 
 @Composable
 private fun LeafImage() {
-    val isLight=MaterialTheme.colors.isLight
-    val leafImageRes=if(isLight){
+    val isLight = MaterialTheme.colors.isLight
+    val leafImageRes = if (isLight) {
         R.drawable.ic_light_welcome_illos
-    }else{
+    } else {
         R.drawable.ic_dark_welcome_illos
     }
 
@@ -75,16 +76,16 @@ private fun LeafImage() {
         painter = painterResource(id = leafImageRes),
         contentDescription = null,
         modifier = Modifier
-            .offset(x=88.dp)
+            .offset(x = 88.dp)
     )
 }
 
 @Composable
 private fun LogoImage() {
-    val isLight=MaterialTheme.colors.isLight
-    val logoImageRes=if(isLight){
+    val isLight = MaterialTheme.colors.isLight
+    val logoImageRes = if (isLight) {
         R.drawable.ic_light_logo
-    }else{
+    } else {
         R.drawable.ic_dark_logo
     }
     Image(
@@ -105,21 +106,22 @@ private fun AppSubtitle() {
 
 @Composable
 private fun CreateAccountButton() {
-   BloomSecondaryButton(buttonText = "Create account")
+    BloomSecondaryButton(buttonText = "Create account")
 }
 
 @Composable
 private fun LoginButton(navController: NavController) {
-    val isLight=MaterialTheme.colors.isLight
-    var textColor=if(isLight){
+    val isLight = MaterialTheme.colors.isLight
+    val textColor = if (isLight) {
         Pink900
-    }else{
+    } else {
         White
     }
 
-    TextButton(onClick = {
-        navController.navigate("login")
-    },
+    TextButton(
+        onClick = {
+            navController.navigate("login")
+        },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
@@ -153,7 +155,7 @@ private fun WelcomeBackground() {
 
 @Preview
 @Composable
-private fun PreviewDarkWelcomeScreen(){
+private fun PreviewDarkWelcomeScreen() {
     BloomAppTheme(darkTheme = true) {
         WelcomeScreen(rememberNavController())
     }
@@ -162,7 +164,7 @@ private fun PreviewDarkWelcomeScreen(){
 
 @Preview
 @Composable
-private fun PreviewLightWelcomeScreen(){
+private fun PreviewLightWelcomeScreen() {
     BloomAppTheme(darkTheme = false) {
         WelcomeScreen(rememberNavController())
     }

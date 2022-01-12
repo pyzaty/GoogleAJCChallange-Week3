@@ -14,15 +14,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BloomAppTheme {
-               val navController= rememberNavController()
-                NavHost(navController = navController, startDestination = "home" ){
-                    composable("welcome"){
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = "home") {
+                    composable("welcome") {
                         WelcomeScreen(navController)
                     }
-                    composable("login"){
+                    composable("login") {
                         LoginScreen(navController)
                     }
-                    composable("home"){
+                    composable("home") {
                         HomeScreen()
                     }
                 }
