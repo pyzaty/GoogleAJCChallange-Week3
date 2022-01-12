@@ -15,10 +15,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pyza.bloomapp.ui.theme.BloomAppTheme
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel){
+fun HomeScreen(){
+
+    val factory= object: ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            val repository=InMemoryPlantService()
+
+            @Suppress("UNCHECKED_CAST")
+            return HomeViewModel(
+                plantRepository = repository
+            ) as T
+        }
+    }
+
+    val homeViewModel : HomeViewModel = viewModel(key = null, factory = factory)
+
     val currentState: State<HomeViewState> = homeViewModel.viewState.collectAsState()
     HomeScreenScaffold(state = currentState.value)
 }
