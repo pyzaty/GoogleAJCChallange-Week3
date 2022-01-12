@@ -8,18 +8,33 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pyza.bloomapp.ui.theme.BloomAppTheme
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel){
-    val currentState: State<HomeViewState> = homeViewModel.viewState.collectAsState()
+fun HomeScreen(){
+
+    val factory= object: ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            val repository=InMemoryPlantService()
+
+            @Suppress("UNCHECKED_CAST")
+            return HomeViewModel(
+                plantRepository = repository
+            ) as T
+        }
+    }
+
+    val homeViewModel : HomeViewModel = viewModel(key = null, factory = factory)
+    val currentState:MutableState<HomeViewState> =  homeViewModel.viewState
     HomeScreenScaffold(state = currentState.value)
 }
 
