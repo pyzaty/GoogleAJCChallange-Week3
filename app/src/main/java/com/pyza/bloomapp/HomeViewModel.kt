@@ -1,9 +1,9 @@
 package com.pyza.bloomapp
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -14,8 +14,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val plantRepository: PlantRepository):ViewModel()
 {
-    private val _viewState= MutableStateFlow(HomeViewState())
-    val viewState:StateFlow<HomeViewState> = _viewState
+
+    private val _viewState= mutableStateOf(HomeViewState())
+    val viewState: MutableState<HomeViewState> = _viewState
 
     init{
         fetchPlantThemes()

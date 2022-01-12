@@ -8,8 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,8 +34,7 @@ fun HomeScreen(){
     }
 
     val homeViewModel : HomeViewModel = viewModel(key = null, factory = factory)
-
-    val currentState: State<HomeViewState> = homeViewModel.viewState.collectAsState()
+    val currentState:MutableState<HomeViewState> =  homeViewModel.viewState
     HomeScreenScaffold(state = currentState.value)
 }
 
